@@ -13,7 +13,14 @@
 
 'use strict';
 
-//require('normalize.css');   <--- wrong?
+// http://stackoverflow.com/questions/10714315/node-js-express-and-using-development-versus-production-in-app-configure
+//
+// starting node
+//
+// $ NODE_ENV=development node app.js
+//
+//
+
 
 var express = require('express');
 var path = require('path');
@@ -58,6 +65,14 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
+
+  // Start the server (from hello-world)
+    var server = app.listen(process.env.PORT || '8080', '0.0.0.0', function() {
+    console.log('App listening at http://%s:%s', server.address().address,
+      server.address().port);
+    console.log('Press Ctrl+C to quit.');
+  });
+
 }
 
 // production error handler
@@ -71,4 +86,4 @@ app.use(function(err, req, res) {
 });
 
 
-module.exports = app;
+module.exports = app;  // http://openmymind.net/2012/2/3/Node-Require-and-Exports/
